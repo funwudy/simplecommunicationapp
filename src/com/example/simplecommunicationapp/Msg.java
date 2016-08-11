@@ -1,10 +1,8 @@
 package com.example.simplecommunicationapp;
 
-import java.util.List;
-
 public class Msg {
 	
-	private static final String SPLITTER = "£¡£¿£¡";
+	private static final String SPLITTER = "¡·£¡£¿£¡¡¶";
 
 	private String speaker;
 	private String content;

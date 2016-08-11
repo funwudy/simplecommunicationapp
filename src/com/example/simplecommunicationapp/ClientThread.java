@@ -52,7 +52,6 @@ public class ClientThread extends Thread {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 					Looper.prepare();// do not forget!!!
 					netHandler = new Handler() {
 						@Override
@@ -63,7 +62,6 @@ public class ClientThread extends Thread {
 								try {
 									sc.write(MainActivity.charset.encode(message));
 								} catch (IOException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 								break;

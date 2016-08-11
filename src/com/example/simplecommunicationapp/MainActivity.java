@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -48,7 +49,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		uiHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
 				switch (msg.what) {
 				case ClientThread.UPDATE_MSG:
 					Msg newMsg = (Msg) msg.obj;
@@ -67,17 +67,22 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.send_button:
-			final String content = editText.getText().toString();
-			updateMsgView(new Msg(ClientThread.getUserName(), content));
-			editText.setText("");
-			
-			Message message = new Message();
-			message.what = ClientThread.SEND_MSG;
-			message.obj = new Msg(ClientThread.getUserName(), content);
-			clientThread.getNetHandler().sendMessage(message);
+			Handler netHandler = clientThread.getNetHandler();
+			if (netHandler != null) {
+				final String content = editText.getText().toString();
+				updateMsgView(new Msg(ClientThread.getUserName(), content));
+				editText.setText("");
+				
+				Message message = new Message();
+				message.what = ClientThread.SEND_MSG;
+				message.obj = new Msg(ClientThread.getUserName(), content);
+				netHandler.sendMessage(message);
+			} else {
+				Toast.makeText(this, "The network is not working", 
+						Toast.LENGTH_SHORT).show();
+			}
 			
 			break;
 		default:
