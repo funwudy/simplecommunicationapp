@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <com.example.simplecommunicationapp.widget.ProgressWithTextBar
+        android:id="@+id/progress_with_text_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.example.simplecommunicationapp.widget.ProgressWithTextBar>
+
     <ListView
         android:id="@+id/msg_view"
         android:layout_width="match_parent"
@@ -22,12 +28,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="@string/hint_msg" />
-        
-        <Button 
+
+        <Button
             android:id="@+id/send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/send_str"/>
+            android:text="@string/send_str" />
     </LinearLayout>
 
 </LinearLayout>

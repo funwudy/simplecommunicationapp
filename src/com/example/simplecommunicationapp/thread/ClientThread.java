@@ -1,4 +1,4 @@
-package com.example.simplecommunicationapp;
+package com.example.simplecommunicationapp.thread;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -6,6 +6,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+
+import com.example.simplecommunicationapp.activity.MainActivity;
+import com.example.simplecommunicationapp.model.Msg;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -98,6 +101,14 @@ public class ClientThread extends Thread {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (sc != null)
+				try {
+					sc.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 	}
 

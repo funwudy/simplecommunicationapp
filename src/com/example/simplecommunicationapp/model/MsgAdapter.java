@@ -1,6 +1,10 @@
-package com.example.simplecommunicationapp;
+package com.example.simplecommunicationapp.model;
 
 import java.util.List;
+
+import com.example.simplecommunicationapp.R;
+import com.example.simplecommunicationapp.R.id;
+import com.example.simplecommunicationapp.thread.ClientThread;
 
 import android.content.Context;
 import android.view.LayoutInflater;

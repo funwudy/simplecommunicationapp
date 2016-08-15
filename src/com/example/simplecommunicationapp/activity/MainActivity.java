@@ -1,14 +1,21 @@
-package com.example.simplecommunicationapp;
+package com.example.simplecommunicationapp.activity;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import com.example.simplecommunicationapp.R;
+import com.example.simplecommunicationapp.R.id;
+import com.example.simplecommunicationapp.R.layout;
+import com.example.simplecommunicationapp.model.Msg;
+import com.example.simplecommunicationapp.model.MsgAdapter;
+import com.example.simplecommunicationapp.thread.ClientThread;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,9 +32,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	private EditText editText;
 	private Button sendButton;
 	private ListView msgView;
-	
+
 	private List<Msg> msgList = new ArrayList<Msg>();
-	
+
 	private MsgAdapter adapter;
 
 	private ClientThread clientThread;
@@ -40,9 +47,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		msgView = (ListView) findViewById(R.id.msg_view);
 		adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
 		msgView.setAdapter(adapter);
-		
+
 		editText = (EditText) findViewById(R.id.input_text);
-		
+
 		sendButton = (Button) findViewById(R.id.send_button);
 		sendButton.setOnClickListener(this);
 
@@ -64,32 +71,33 @@ public class MainActivity extends Activity implements OnClickListener {
 		clientThread.start();
 	}
 
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.send_button:
-			Handler netHandler = clientThread.getNetHandler();
-			if (netHandler != null) {
-				final String content = editText.getText().toString();
-				updateMsgView(new Msg(ClientThread.getUserName(), content));
-				editText.setText("");
-				
-				Message message = new Message();
-				message.what = ClientThread.SEND_MSG;
-				message.obj = new Msg(ClientThread.getUserName(), content);
-				netHandler.sendMessage(message);
+			if (TextUtils.isEmpty(editText.getText())) {
+				Toast.makeText(this, "Message cannot be empty!", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(this, "The network is not working", 
-						Toast.LENGTH_SHORT).show();
+				Handler netHandler = clientThread.getNetHandler();
+				if (netHandler != null) {
+					final String content = editText.getText().toString();
+					updateMsgView(new Msg(ClientThread.getUserName(), content));
+					editText.setText("");
+
+					Message message = new Message();
+					message.what = ClientThread.SEND_MSG;
+					message.obj = new Msg(ClientThread.getUserName(), content);
+					netHandler.sendMessage(message);
+				} else {
+					Toast.makeText(this, "The network is not working", Toast.LENGTH_SHORT).show();
+				}
 			}
-			
 			break;
 		default:
 			break;
 		}
 	}
-	
+
 	private void updateMsgView(Msg msg) {
 		msgList.add(msg);
 		adapter.notifyDataSetChanged();
