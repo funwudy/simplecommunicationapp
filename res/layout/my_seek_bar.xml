@@ -12,7 +12,14 @@
         <com.example.simplecommunicationapp.widget.TextMoveLayout
             android:id="@+id/text_move_layout"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="30dp" >
+
+            <TextView
+                android:id="@+id/cur_text"
+                android:layout_width="@dimen/cur_text_width"
+                android:layout_height="@dimen/cur_text_height"
+                android:gravity="center" />
+        </com.example.simplecommunicationapp.widget.TextMoveLayout>
 
         <SeekBar
             android:id="@+id/seek_bar"
@@ -28,15 +35,13 @@
             android:id="@+id/left_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="left" />
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/right_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="right" />
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
 </LinearLayout>
