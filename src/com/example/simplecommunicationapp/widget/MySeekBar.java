@@ -2,11 +2,8 @@ package com.example.simplecommunicationapp.widget;
 
 import com.example.simplecommunicationapp.R;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
