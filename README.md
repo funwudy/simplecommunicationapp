@@ -1,2 +1,2 @@
 # simplecommunicationapp
-for study and test
+For study and test nio client, custom widget, etc.
