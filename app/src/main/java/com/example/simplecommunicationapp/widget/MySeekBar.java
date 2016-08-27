@@ -4,6 +4,7 @@ import com.example.simplecommunicationapp.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -16,8 +17,6 @@ public class MySeekBar extends LinearLayout {
 	private TextView leftText;
 	private TextView rightText;
 	private TextView curText;
-
-	private TextMoveLayout mTextMoveLayout;
 
 	double moveStep;
 
@@ -35,7 +34,10 @@ public class MySeekBar extends LinearLayout {
 		rightText.setText(String.valueOf(seekBar.getMax()));
 		curText = (TextView) findViewById(R.id.cur_text);
 		curText.setText(String.valueOf(seekBar.getProgress()));
-		curText.layout(0, 0, 30, 30);
+		curText.layout(0, 0, 100, 100);
+
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+
 
 		seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
 
